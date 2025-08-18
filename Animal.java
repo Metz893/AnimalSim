@@ -5,7 +5,7 @@ public abstract class Animal {
     public static final int NOWHERE = 0;
 
     public Animal () {
-        symbol = "0";
+        symbol = "-";
     }
 
     public String getSymbol () {
