@@ -20,6 +20,56 @@ public class River {
             else
                 System.out.print(a);
         }
+
+        System.out.println();
+    }
+
+    //Go through List and do the actions
+    public void step() {
+        for (int i = 0; i < river.length; i++) {
+            Animal current = river[i];
+            int action;
+
+            if (current != null) {
+                action = current.act();
+
+                if (action == 1 && i != 0) {
+                    if (river[i-1] == null) {
+                        river[i-1] = current;
+                        river[i] = null;
+                    }
+                    else  if (river[i-1] instanceof Bear) {
+                        river[randomNull()] = new Bear();
+                    }
+                }
+
+                if (action == 2 && i != river.length) {
+                    if (river[i+1] == null) {
+                        river[i+1] = current;
+                        river[i] = null;
+                    }
+                    else if (river[i+1] instanceof Bear) {
+                        river[randomNull()] = new Bear();
+                    }
+                }
+            }
+        }
+    }
+
+    //randm null sport in river
+    private int randomNull() {
+        int random = randomNum();
+
+        while (river[random] != null) {
+            random = randomNum();
+        }
+
+        return random;
+    }
+
+    //random number in river length
+    private int randomNum () {
+        return (int) (Math.random() * river.length);
     }
 
 
