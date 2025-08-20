@@ -52,7 +52,13 @@ public class River {
             random = randomNum();
         }
 
-        return random;
+        if (river[random] == null)
+            return random;
+        else
+            print();
+            System.exit(0);
+
+        return 0;
     }
 
     public boolean hasSpace() {
