@@ -85,7 +85,7 @@ public class River {
     }
 
     //randm null sport in river
-    private int randomNull() {
+    public int randomNull() {
         int random = randomNum();
 
         while (hasSpace() && river[random] != null) {

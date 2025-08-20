@@ -1,14 +1,27 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        River river = new River(100);
+        Scanner input = new Scanner(System.in);
 
-        river.addAnimal(new Bear(), 5);
-        river.addAnimal(new Fish(), 4);
-        river.addAnimal(new Bear(), 90);
-        river.addAnimal(new Fish(), 51);
-        river.addAnimal(new Bear(), 10);
-        river.addAnimal(new Fish(), 50);
+        System.out.print("Enter River length: ");
+        int length = input.nextInt();
 
+        System.out.print("Number of Fish: ");
+        int numFish = input.nextInt();
+
+        System.out.print("Number of Bears: ");
+        int numBear = input.nextInt();
+
+        River river = new River(length);
+
+        for (int i = 0; i < numBear; i++) {
+            river.addAnimal(new Bear(), river.randomNull());
+        }
+
+        for (int i = 0; i < numFish; i++) {
+            river.addAnimal(new Fish(), river.randomNull());
+        }
 
         while(true) {  
             river.step();     
