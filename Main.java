@@ -23,6 +23,8 @@ public class Main {
             river.addAnimal(new Fish(), river.randomNull());
         }
 
+        input.close();
+
         while(true) {  
             river.step();     
             river.print(); 
@@ -39,6 +41,7 @@ public class Main {
                 throw new RuntimeException(e);  
             }  
         }
+
     }
     
 }
