@@ -33,23 +33,51 @@ public class River {
             if (current != null) {
                 action = current.act();
 
-                if (action == 1 && i != 0) {
-                    if (river[i-1] == null) {
-                        river[i-1] = current;
-                        river[i] = null;
+                if (river[i] instanceof Bear) {
+                    if (action == 1 && i != 0) {
+                        if (river[i-1] == null || river[i-1] instanceof Fish) {
+                            river[i-1] = current;
+                            river[i] = null;
+                        }
+                        else {
+                            river[randomNull()] = new Bear();
+                        }
                     }
-                    else  if (river[i-1] instanceof Bear) {
-                        river[randomNull()] = new Bear();
+
+                    else if (action == 2 && i != river.length - 1) {
+                        if (river[i+1] == null || river[i+1] instanceof Fish) {
+                            river[i+1] = current;
+                            river[i] = null;
+                        }
+                        else {
+                            river[randomNull()] = new Bear();
+                        }
                     }
                 }
 
-                if (action == 2 && i != river.length) {
-                    if (river[i+1] == null) {
-                        river[i+1] = current;
-                        river[i] = null;
+                else {
+                    if (action == 1 && i != 0) {
+                        if (river[i-1] == null) {
+                            river[i-1] = current;
+                            river[i] = null;
+                        }
+                        else  if (river[i-1] instanceof Fish) {
+                            river[randomNull()] = new Fish();
+                        }
+                        else 
+                            river[i] = null;
                     }
-                    else if (river[i+1] instanceof Bear) {
-                        river[randomNull()] = new Bear();
+
+                    else if (action == 2 && i != river.length - 1) {
+                        if (river[i+1] == null) {
+                            river[i+1] = current;
+                            river[i] = null;
+                        }
+                        else if (river[i+1] instanceof Fish) {
+                            river[randomNull()] = new Fish();
+                        }
+                        else 
+                            river[i] = null;
                     }
                 }
             }
@@ -60,11 +88,20 @@ public class River {
     private int randomNull() {
         int random = randomNum();
 
-        while (river[random] != null) {
+        while (hasSpace() && river[random] != null) {
             random = randomNum();
         }
 
         return random;
+    }
+
+    public boolean hasSpace() {
+        for (Animal a : river) {
+            if (a == null)
+                return true;
+        }
+
+        return false;
     }
 
     //random number in river length
